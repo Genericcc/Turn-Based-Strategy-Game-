@@ -32,7 +32,9 @@ public class UnitActionSystem : MonoBehaviour
 
     private void Start() 
     {
-        SetSelectedUnit(selectedUnit);    
+        SetSelectedUnit(selectedUnit);  
+
+        Unit.OnAnyUnitDead += Unit_OnAnyUnitDead;
     }
 
     private void Update() 
@@ -131,7 +133,7 @@ public class UnitActionSystem : MonoBehaviour
     {
         selectedUnit = unit;
 
-        SetSelectedAction(unit.GetMoveAction());
+        SetSelectedAction(unit.GetAction<MoveAction>());
 
         OnSelectedUnitChanged?.Invoke(this, EventArgs.Empty);
     }
@@ -151,5 +153,16 @@ public class UnitActionSystem : MonoBehaviour
     public BaseAction GetSelectedAction()
     {
         return selectedAction;
+    }
+    
+    //Automatic selection of a different Unit if the one previously selected dies
+    private void Unit_OnAnyUnitDead(object sender, EventArgs e)
+    {
+        List<Unit> friendlyUnitList = UnitManager.Instance.GetFriendlyUnitList();
+
+        if(friendlyUnitList[0] != null)
+        {
+            SetSelectedUnit(friendlyUnitList[0]);
+        }
     }
 }

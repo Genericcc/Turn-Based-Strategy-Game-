@@ -12,9 +12,6 @@ public class Unit : MonoBehaviour
     [SerializeField] private bool isEnemy;
 
     private GridPosition gridPosition;
-    private MoveAction moveAction;
-    private ShootAction shootAction;
-    private SpinAction spinAction;
     private HealthSystem healthSystem;
 
     private BaseAction[] baseActionArray;
@@ -24,11 +21,7 @@ public class Unit : MonoBehaviour
 
     private void Awake() 
     {
-        moveAction = GetComponent<MoveAction>();
-        shootAction = GetComponent<ShootAction>();
-        spinAction = GetComponent<SpinAction>();
         healthSystem = GetComponent<HealthSystem>();
-
         baseActionArray = GetComponents<BaseAction>();
     }
 
@@ -38,11 +31,9 @@ public class Unit : MonoBehaviour
         LevelGrid.Instance.AddUnitAtGridPosition(gridPosition, this);
 
         TurnSystem.Instance.OnTurnChanged += TurnSystem_OnTurnChanged;
-
         healthSystem.OnDead += HealthSystem_OnDead;
 
         OnAnyUnitSpawned?.Invoke(this, EventArgs.Empty);
-
     }
 
     private void Update() 
@@ -58,11 +49,17 @@ public class Unit : MonoBehaviour
         }
     }
 
-    public MoveAction GetMoveAction() => moveAction;
-
-    public ShootAction GetShootAction() => shootAction;
-
-    public SpinAction GetSpinAction() => spinAction;
+    public T GetAction<T>() where T : BaseAction
+    {
+        foreach(BaseAction baseAction in baseActionArray)
+        {
+            if(baseAction is T) 
+            { 
+                return (T)baseAction;
+            }
+        }
+        return null;
+    } 
 
     public GridPosition GetGridPosition() => gridPosition;
 

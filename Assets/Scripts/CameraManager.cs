@@ -35,6 +35,7 @@ public class CameraManager : MonoBehaviour
                 Unit targetUnit = shootAction.GetTargetUnit();
 
                 Vector3 cameraCharacterHeight = Vector3.up * 1.7f;
+                Debug.Log(targetUnit.name);
                 Vector3 shootDir = (targetUnit.GetWorldPosition() - shooterUnit.GetWorldPosition()).normalized;
 
                 float shoulderOffsetAmount = 0.5f;
