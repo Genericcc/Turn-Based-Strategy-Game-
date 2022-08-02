@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
-{
+{   
+    private const int ACTION_POINTS_MAX = 9;
+
     public static event EventHandler OnAnyActionPointsChanged;
     public static event EventHandler OnAnyUnitSpawned;
     public static event EventHandler OnAnyUnitDead;
@@ -13,10 +15,8 @@ public class Unit : MonoBehaviour
 
     private GridPosition gridPosition;
     private HealthSystem healthSystem;
-
     private BaseAction[] baseActionArray;
 
-    private const int ACTION_POINTS_MAX = 2;
     private int actionPoints = ACTION_POINTS_MAX;
 
     private void Awake() 
