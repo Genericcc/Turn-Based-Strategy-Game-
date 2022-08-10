@@ -158,11 +158,17 @@ public class UnitActionSystem : MonoBehaviour
     //Automatic selection of a different Unit if the one previously selected dies
     private void Unit_OnAnyUnitDead(object sender, EventArgs e)
     {
-        List<Unit> friendlyUnitList = UnitManager.Instance.GetFriendlyUnitList();
+        Unit deadUnit = sender as Unit; 
 
-        if(friendlyUnitList[0] != null)
+        if(!deadUnit.IsEnemy())
         {
-            SetSelectedUnit(friendlyUnitList[0]);
+            List<Unit> friendlyUnitList = UnitManager.Instance.GetFriendlyUnitList();
+
+            if(friendlyUnitList[0] != null)
+            {
+                SetSelectedUnit(friendlyUnitList[0]);
+            }
         }
+        
     }
 }

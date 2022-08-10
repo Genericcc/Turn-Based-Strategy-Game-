@@ -23,10 +23,10 @@ public class ShootAction : BaseAction
 
     [SerializeField] private LayerMask obstaclesLayerMask;
 
-    private State state;
     private Unit targetUnit;
-    private int maxShootDistance = 7;
+    private State state;
     private float stateTimer;
+    private int maxShootDistance = 7;
     private bool canShootBullet;
 
     private void Update()
@@ -42,6 +42,7 @@ public class ShootAction : BaseAction
         {
             case State.Aiming:
                 Vector3 aimDir = (targetUnit.GetWorldPosition() - unit.GetWorldPosition()).normalized;
+                
                 float rotateSpeed = 10f;
                 transform.forward = Vector3.Lerp(transform.forward, aimDir, Time.deltaTime * rotateSpeed);
                 break;
@@ -129,6 +130,7 @@ public class ShootAction : BaseAction
                 int testDistance = Mathf.Abs(x) + Mathf.Abs(z);
                 if(testDistance > maxShootDistance)
                 {
+                    //Not within circular range
                     continue;
                 }
 
