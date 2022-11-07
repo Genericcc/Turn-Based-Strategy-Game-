@@ -6,6 +6,7 @@ using UnityEngine;
 public class Door : MonoBehaviour, IInteractable
 {
     [SerializeField] private bool isOpen;
+    [SerializeField] private InteractSphere interactSphere;
 
     private GridPosition gridPosition;
     private Animator animator;
@@ -27,7 +28,8 @@ public class Door : MonoBehaviour, IInteractable
         if(isOpen)
         {
             OpenDoor();
-        } else 
+        } 
+        else 
         {
             CloseDoor();
         }
@@ -55,14 +57,19 @@ public class Door : MonoBehaviour, IInteractable
         isActive = true;
         timer = .5f;
 
-        if(isOpen)
+        if(interactSphere.IsSphereGreen())
         {
-            CloseDoor();
-        } 
-        else 
-        {
-            OpenDoor();
+            if(isOpen)
+            {
+                CloseDoor();
+            } 
+            else 
+            {
+                OpenDoor();
+            }
         }
+
+        
     }
 
     private void OpenDoor()

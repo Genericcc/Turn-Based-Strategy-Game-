@@ -21,7 +21,7 @@ public class InteractSphere : MonoBehaviour, IInteractable
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
         LevelGrid.Instance.SetInteractableAtGridPosition(gridPosition, this);
 
-        SetColorGreen();
+        SetColorRed();
     }
 
     private void Update() 
@@ -65,5 +65,15 @@ public class InteractSphere : MonoBehaviour, IInteractable
         {
             SetColorGreen();
         }
+    }
+
+    public bool IsSphereGreen()
+    {
+        if(isGreen)
+        {
+            return true;
+        }
+
+        return false;
     }
 }
