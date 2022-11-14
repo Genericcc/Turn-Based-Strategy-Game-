@@ -1,5 +1,5 @@
 # Turn-Based-Strategy-Game-
-An X-COM-like turn based strategy with many actions and enemy AI
+An X-COM-like turn based strategy with actions and enemy AI
 
 ![image](https://user-images.githubusercontent.com/104710576/190617897-a1b2efdb-8cda-4876-b2da-948ffeaa63ba.png)
 
